@@ -6,13 +6,17 @@ class Surat_keluar extends CI_Controller
     public function __construct()
     {
         parent::__construct();
+        if (!$this->session->userdata('login')) {
+            $this->session->sess_destroy();
+            redirect('auth');
+        }
         $this->load->model('M_letter');
         $this->load->helper('upload');
     }
 
     public function index()
     {
-        $surat_keluar = $this->M_letter->get_letters_by_type('outgoing');
+        $surat_keluar = $this->M_letter->get_all_letters();
         $data = [
             'title' => 'surat keluar',
             'surat_keluar' => $surat_keluar,
@@ -55,8 +59,6 @@ class Surat_keluar extends CI_Controller
             'tgl' => $tanggal_surat,
             'image' => $image,
             'type' => 'outgoing',
-            // 'created_by' => $this->session->userdata('id'),
-            'created_by' => 1,
         ];
 
         if (!$this->M_letter->insert_letter($data)) {
@@ -107,13 +109,12 @@ class Surat_keluar extends CI_Controller
             'nama_supir' => $nama_supir,
             'tgl' => $tanggal_surat,
             'image' => $image,
-            'type' => 'outgoing',
-            // 'updated_by' => $this->session->userdata('id'),
-            'created_by' => 1,
         ];
 
         if (!$this->M_letter->update_letter($id, $data)) {
             $this->session->set_flashdata('error', 'Data surat keluar gagal diubah');
+            redirect('surat_keluar');
+            return;
         };
         $this->session->set_flashdata('success', 'Data surat keluar berhasil diubah');
         redirect('surat_keluar');
@@ -121,9 +122,13 @@ class Surat_keluar extends CI_Controller
 
     public function delete($id)
     {
+        $surat_keluar = $this->M_letter->get_letter_by_id($id);
         if (!$this->M_letter->delete_letter($id)) {
             $this->session->set_flashdata('error', 'Data surat keluar gagal dihapus');
+            redirect('surat_keluar');
+            return;
         };
+        unlink('assets/upload/surat_keluar/' . $surat_keluar->image);
         $this->session->set_flashdata('success', 'Data surat keluar berhasil dihapus');
         redirect('surat_keluar');
     }

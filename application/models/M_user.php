@@ -7,12 +7,30 @@ class M_user extends CI_Model
 
     public function get_all_users()
     {
-        return $this->db->get($this->table)->result_array();
+        return $this->db->get($this->table)->result();
+    }
+
+    public function count_user()
+    {
+        $count = $this->db->count_all_results($this->table);
+        return $count;
+    }
+
+    public function is_username_exist($username)
+    {
+        $this->db->where('username', $username);
+        $query = $this->db->get($this->table);
+        return $query->num_rows() > 0; // True jika username sudah ada
     }
 
     public function get_user_by_id($id)
     {
-        return $this->db->get_where($this->table, ['id' => $id])->row_array();
+        return $this->db->get_where($this->table, ['id' => $id])->row();
+    }
+
+    public function find_where($where)
+    {
+        return $this->db->get_where($this->table, $where)->row();
     }
 
     public function insert_user($data)

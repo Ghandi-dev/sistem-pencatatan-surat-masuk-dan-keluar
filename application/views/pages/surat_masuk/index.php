@@ -47,10 +47,6 @@ foreach ($surat_masuk as $row): ?>
                                                                 class="btn btn-sm btn-warning">
                                                                 <span class="fa fa-edit"></span> Edit
                                                             </a>
-                                                            <a href="<?=base_url('surat_masuk/delete/' . $row->id)?>"
-                                                                class="btn btn-sm btn-danger btn-hapus">
-                                                                <span class="fa fa-trash"></span> Del
-                                                            </a>
                                                         </td>
                                                     </tr>
                                                     <?php endforeach;?>

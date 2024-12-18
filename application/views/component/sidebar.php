@@ -26,10 +26,12 @@
                     href="<?=base_url('laporan')?>"><i
                         class="fas fa-file-signature"></i></i></i><span>Laporan</span></a>
             </li>
+            <?php if ($this->session->userdata('role') == 'superadmin'): ?>
             <li class="<?=$this->uri->segment(1) === 'kelola_user' ? "active" : ""?>"><a class="nav-link"
                     href="<?=base_url('kelola_user')?>"><i class="fas fa-users-cog"></i></i></i><span>Kelola
                         User</span></a>
             </li>
+            <?php endif;?>
 
 
         </ul>

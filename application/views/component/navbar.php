@@ -9,7 +9,9 @@
     <ul class="navbar-nav navbar-right">
         <li class="dropdown"><a href="#" data-toggle="dropdown"
                 class="nav-link dropdown-toggle nav-link-lg nav-link-user">
-                <img alt="image" src="<?=base_url()?>assets/img/avatar/avatar-4.png" class="rounded-circle mr-1">
+                <img alt="image" src="<?=base_url('assets/upload/user/') . $this->session->userdata('foto')?>"
+                    class="rounded-circle mr-1"
+                    style="width: 50px; height: 50px; object-fit: cover; border-radius: 50%;">
                 <div class="d-sm-none d-lg-inline-block"><?=$this->session->userdata('nama')?></div>
             </a>
             <div class="dropdown-menu dropdown-menu-right">
