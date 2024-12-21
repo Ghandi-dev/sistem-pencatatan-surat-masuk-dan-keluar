@@ -50,8 +50,8 @@ class M_letter extends CI_Model
 
         // Apply filters based on date range
         if (!empty($start_date) && !empty($end_date)) {
-            $this->db->where('DATE(l.tgl) >=', $start_date);
-            $this->db->where('DATE(l.tgl) <=', $end_date);
+            $this->db->where('DATE(l.tgl_kembali) >=', $start_date);
+            $this->db->where('DATE(l.tgl_kembali) <=', $end_date);
         }
         $this->db->where('l.type', $type);
 
@@ -73,15 +73,18 @@ class M_letter extends CI_Model
         $start_date = date('Y-m-d', strtotime('-5 days'));
         $end_date = date('Y-m-d');
 
+        // Menentukan kolom yang digunakan berdasarkan type
+        $date_column = $type == 'incoming' ? 'tgl_kembali' : 'tgl';
+
         // Query untuk mendapatkan jumlah surat per hari
-        $this->db->select('DATE(tgl) as letter_date, COUNT(*) as letter_count');
+        $this->db->select('DATE(' . $date_column . ') as letter_date, COUNT(*) as letter_count', false);
         if ($type) {
             $this->db->where('type', $type);
         }
-        $this->db->where('DATE(tgl) >=', $start_date);
-        $this->db->where('DATE(tgl) <=', $end_date);
-        $this->db->group_by('DATE(tgl)');
-        $this->db->order_by('DATE(tgl)', 'ASC'); // Urutkan berdasarkan tanggal
+        $this->db->where('DATE(' . $date_column . ') >=', $start_date);
+        $this->db->where('DATE(' . $date_column . ') <=', $end_date);
+        $this->db->group_by('DATE(' . $date_column . ')');
+        $this->db->order_by('DATE(' . $date_column . ')', 'ASC');
         $query_result = $this->db->get($this->table)->result();
 
         // Membuat array default untuk 5 hari terakhir

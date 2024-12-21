@@ -91,10 +91,10 @@ class Surat_masuk extends CI_Controller
         ];
 
         if (!$this->M_letter->update_letter($id, $data)) {
-            $this->session->set_flashdata('error', 'Data surat masuk gagal ditambahkan');
+            $this->session->set_flashdata('error', 'Data surat masuk gagal diubah');
             redirect('surat_masuk/add');
         }
-        $this->session->set_flashdata('success', 'Data surat masuk berhasil ditambahkan');
+        $this->session->set_flashdata('success', 'Data surat masuk berhasil diubah');
         redirect('surat_masuk');
     }
 
