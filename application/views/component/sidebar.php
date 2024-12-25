@@ -14,6 +14,7 @@
                     href="<?=base_url('dashboard')?>"><i class="fab fa-cloudsmith"></i> <span>Dashboard</span></a></li>
 
             <li class="menu-header">Menu</li>
+            <?php if ($this->session->userdata('role') == 'admin'): ?>
             <li class="<?=$this->uri->segment(1) === 'surat_keluar' ? "active" : ""?>"><a class="nav-link"
                     href="<?=base_url('surat_keluar')?>"><i class="fas fa-file-export"></i></i></i> <span>Surat
                         Keluar</span></a>
@@ -26,6 +27,7 @@
                     href="<?=base_url('laporan')?>"><i
                         class="fas fa-file-signature"></i></i></i><span>Laporan</span></a>
             </li>
+            <?php endif;?>
             <?php if ($this->session->userdata('role') == 'superadmin'): ?>
             <li class="<?=$this->uri->segment(1) === 'kelola_user' ? "active" : ""?>"><a class="nav-link"
                     href="<?=base_url('kelola_user')?>"><i class="fas fa-users-cog"></i></i></i><span>Kelola
