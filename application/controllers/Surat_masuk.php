@@ -39,6 +39,12 @@ class Surat_masuk extends CI_Controller
         $id = htmlspecialchars($this->input->post('id_surat'));
         $deskripsi_barang = htmlspecialchars($this->input->post('deskripsi_barang'));
         $qty = htmlspecialchars($this->input->post('qty'));
+        // Hapus format ribuan (koma)
+        $qty = str_replace('.', '', $qty);
+
+        // Pastikan nilai adalah integer
+        $qty = (int) $qty;
+
         $no_pol = htmlspecialchars($this->input->post('no_pol'));
         $tgl_kembali = htmlspecialchars($this->input->post('tgl_kembali'));
         $keterangan = htmlspecialchars($this->input->post('keterangan'));
@@ -53,6 +59,10 @@ class Surat_masuk extends CI_Controller
 
         ];
 
+        if (isset($id)) {
+            $this->session->set_flashdata('error', 'Data surat tidak ada');
+            redirect('surat_masuk/add');
+        }
         if (!$this->M_letter->update_letter($id, $data)) {
             $this->session->set_flashdata('error', 'Data surat masuk gagal ditambahkan');
             redirect('surat_masuk/add');
@@ -76,6 +86,12 @@ class Surat_masuk extends CI_Controller
         $id = $id;
         $deskripsi_barang = htmlspecialchars($this->input->post('deskripsi_barang'));
         $qty = htmlspecialchars($this->input->post('qty'));
+        // Hapus format ribuan (koma)
+        $qty = str_replace('.', '', $qty);
+
+        // Pastikan nilai adalah integer
+        $qty = (int) $qty;
+        $satuan = htmlspecialchars($this->input->post('satuan'));
         $no_pol = htmlspecialchars($this->input->post('no_pol'));
         $tgl_kembali = htmlspecialchars($this->input->post('tgl_kembali'));
         $keterangan = htmlspecialchars($this->input->post('keterangan'));
@@ -83,6 +99,7 @@ class Surat_masuk extends CI_Controller
         $data = [
             "deskripsi_barang" => $deskripsi_barang,
             "qty" => $qty,
+            "satuan" => $satuan,
             "no_pol" => $no_pol,
             "tgl_kembali" => $tgl_kembali,
             "keterangan" => $keterangan,

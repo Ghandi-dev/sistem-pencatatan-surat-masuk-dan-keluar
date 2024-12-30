@@ -84,7 +84,13 @@
                                             <div class="form-group">
                                                 <label for="qty">Qty</label>
                                                 <input type="text" class="form-control" name="qty" id="qty"
-                                                    placeholder="Qty" required value="<?=$surat_masuk->qty?>">
+                                                    placeholder="Qty" required
+                                                    value="<?=number_format($surat_masuk->qty, 0, ',', '.')?>">
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="satuan">Satuan</label>
+                                                <input type="text" class="form-control" name="satuan" id="satuan"
+                                                    placeholder="Satuan" required value="<?=$surat_masuk->satuan?>">
                                             </div>
                                             <div class="form-group">
                                                 <label for="no_pol">Nomor Polisi</label>
@@ -117,4 +123,18 @@
         <?php $this->load->view('component/footer');?>
     </div>
     <?php $this->load->view('component/script');?>
+    <script>
+        const qtyInput = document.getElementById('qty');
+
+        qtyInput.addEventListener('input', function (e) {
+            // Remove any non-numeric characters
+            let value = this.value.replace(/[^0-9]/g, '');
+
+            // Format value to thousands
+            value = new Intl.NumberFormat('id-ID').format(value);
+
+            // Set formatted value back to input
+            this.value = value;
+        });
+    </script>
 </body>

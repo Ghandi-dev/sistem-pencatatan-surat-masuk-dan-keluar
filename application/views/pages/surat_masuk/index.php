@@ -27,8 +27,10 @@
                                                     <tr>
                                                         <th>No</th>
                                                         <th>Perushaan Penghasil</th>
+                                                        <th>Tanggal Kembali</th>
                                                         <th>Deskripsi Barang</th>
                                                         <th>Qty</th>
+                                                        <th>Satuan</th>
                                                         <th>Keterangan</th>
                                                         <th>Aksi</th>
                                                     </tr>
@@ -39,8 +41,11 @@ foreach ($surat_masuk as $row): ?>
                                                     <tr>
                                                         <td><?=$no++;?></td>
                                                         <td><?=$row->perusahaan_penghasil;?></td>
+                                                        <td><?=$row->tgl_kembali;?></td>
                                                         <td><?=$row->deskripsi_barang;?></td>
-                                                        <td><?=$row->qty;?></td>
+                                                        <td><?=number_format($row->qty, 0, ',', '.');?>
+                                                        </td>
+                                                        <td><?=$row->satuan;?></td>
                                                         <td><?=$row->keterangan;?></td>
                                                         <td>
                                                             <a href="<?=base_url('surat_masuk/edit/' . $row->id)?>"
