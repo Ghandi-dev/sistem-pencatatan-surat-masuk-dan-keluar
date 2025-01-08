@@ -39,6 +39,7 @@ class Surat_masuk extends CI_Controller
         $id = htmlspecialchars($this->input->post('id_surat'));
         // var_dump($id);
         $deskripsi_barang = htmlspecialchars($this->input->post('deskripsi_barang'));
+        $satuan = htmlspecialchars($this->input->post('satuan'));
         $qty = htmlspecialchars($this->input->post('qty'));
         // Hapus format ribuan (koma)
         $qty = str_replace('.', '', $qty);
@@ -54,6 +55,7 @@ class Surat_masuk extends CI_Controller
             "deskripsi_barang" => $deskripsi_barang,
             "qty" => $qty,
             "no_pol" => $no_pol,
+            "satuan" => $satuan,
             "tgl_kembali" => $tgl_kembali,
             "keterangan" => $keterangan,
             "type" => 'incoming',

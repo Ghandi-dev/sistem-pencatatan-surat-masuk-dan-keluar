@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Dec 18, 2024 at 12:22 PM
+-- Generation Time: Jan 08, 2025 at 04:39 AM
 -- Server version: 8.0.30
 -- PHP Version: 7.4.0
 
@@ -35,6 +35,7 @@ CREATE TABLE `letters` (
   `perusahaan_penghasil` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
   `deskripsi_barang` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `qty` int DEFAULT NULL,
+  `satuan` varchar(20) COLLATE utf8mb4_general_ci NOT NULL,
   `no_pol` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `nama_supir` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci DEFAULT NULL,
   `tgl_kembali` date DEFAULT NULL,
@@ -48,8 +49,9 @@ CREATE TABLE `letters` (
 -- Dumping data for table `letters`
 --
 
-INSERT INTO `letters` (`id`, `tgl`, `no_manifest`, `transporter`, `perusahaan_penghasil`, `deskripsi_barang`, `qty`, `no_pol`, `nama_supir`, `tgl_kembali`, `keterangan`, `type`, `image`, `created_at`) VALUES
-(3, '2024-01-05', 'FST123', 'JNE', 'PT. PERTAMINA', NULL, NULL, NULL, 'Jane Smith', NULL, NULL, 'outgoing', 'fe3aaca6b754db24bcc38c1bd2e3f442.jpg', '2024-12-17 09:02:09');
+INSERT INTO `letters` (`id`, `tgl`, `no_manifest`, `transporter`, `perusahaan_penghasil`, `deskripsi_barang`, `qty`, `satuan`, `no_pol`, `nama_supir`, `tgl_kembali`, `keterangan`, `type`, `image`, `created_at`) VALUES
+(3, '2024-01-05', 'FST123', 'JNE', 'PT. PERTAMINA', 'asdas', 660000, 'kg', 'asdd', 'Jane Smith', '2024-12-21', 'asdd', 'incoming', 'fe3aaca6b754db24bcc38c1bd2e3f442.jpg', '2024-12-17 09:02:09'),
+(8, '2025-01-08', 'asd', 'asdasd', 'dasd', 'asdas', 12312, 'asdasf', 'asd', 'asdas', '2025-01-08', 'asd', 'incoming', '5b1a48e5492c8996760a5b9e910651d2.jpg', '2025-01-08 04:24:04');
 
 -- --------------------------------------------------------
 
@@ -128,7 +130,7 @@ ALTER TABLE `user_detail`
 -- AUTO_INCREMENT for table `letters`
 --
 ALTER TABLE `letters`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `users`
