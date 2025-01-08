@@ -37,6 +37,7 @@ class Surat_masuk extends CI_Controller
     public function add_process()
     {
         $id = htmlspecialchars($this->input->post('id_surat'));
+        // var_dump($id);
         $deskripsi_barang = htmlspecialchars($this->input->post('deskripsi_barang'));
         $qty = htmlspecialchars($this->input->post('qty'));
         // Hapus format ribuan (koma)
@@ -59,7 +60,7 @@ class Surat_masuk extends CI_Controller
 
         ];
 
-        if (isset($id)) {
+        if (!isset($id)) {
             $this->session->set_flashdata('error', 'Data surat tidak ada');
             redirect('surat_masuk/add');
         }
